@@ -4,8 +4,10 @@ sys.path.append("../..")
 from MovenetDepthai import MovenetDepthai, KEYPOINT_DICT
 from MovenetRenderer import MovenetRenderer
 import argparse
+import argparse
 import pandas as pd
-import time
+import time 
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-m", "--model", type=str, choices=['lightning', 'thunder'], default='thunder',
@@ -22,12 +24,14 @@ df = pd.DataFrame(columns=['timestamp',
     'left_hip','right_hip','left_knee',
     'right_knee','left_ankle','right_ankle'
 ])
-data = []
 pose = MovenetDepthai(input_src=args.input, model=args.model)
 renderer = MovenetRenderer(pose, output=args.output)
 
+data = []
 
-while True:
+start_time = time.time()
+
+while (time.time()-start_time) < 30:
     # Run blazepose on next frame
     frame, body = pose.next_frame()
     if frame is None: 
@@ -52,11 +56,6 @@ while True:
            'left_ankle': body.keypoints_norm[15], 
            'right_ankle': body.keypoints_norm[16]}
     data.append(row)
-    # Convert data to DataFrame
-    df = pd.DataFrame(data)
-    with pd.ExcelWriter(r'C:\Users\Uporabnik\Desktop\testing.xlsx') as writer: 
-        df.to_excel(writer, sheet_name='df_1') 
-    # Write data to Excel file
     # Draw 2d skeleton
     frame = renderer.draw(frame, body)
     key = renderer.waitKey(delay=1)
@@ -66,3 +65,16 @@ while True:
 renderer.exit()
 pose.exit()
 
+# Convert data to DataFrame
+df = pd.DataFrame(data)
+
+# Write data to Excel file
+with pd.ExcelWriter(r'C:\Users\Uporabnik\Desktop\testing.xlsx') as writer: 
+    df.to_excel(writer, sheet_name='df_1') 
+
+
+
+
+
+
+  
