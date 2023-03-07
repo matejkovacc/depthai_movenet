@@ -1,14 +1,16 @@
-# Keypoint Detection
+# Semaphore alphabet with MoveNet on DepthAI
 
-This demo demonstrates the recognition of a skeleton. 
+This demo demonstrates the recognition of semaphore alphabet.
+
+For each arm (segment shoulder-elbow), its angle with the vertical axe is calculated. The pair of left and right arm angles gives the letter.
 
 
-
+![Semaphore alphabet](medias/semaphore.gif)
 
 ## Usage
 
 ```
--> python3 demo.py 
+-> python3 demo.py -h
 usage: demo.py [-h] [-m {lightning,thunder}] [-i INPUT] [-o OUTPUT]
 
 optional arguments:
