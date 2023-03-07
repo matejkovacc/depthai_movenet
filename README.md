@@ -11,8 +11,18 @@ python demo.py
 ```
 ## Warnings
 
-While loop is set to iterate for 60 seconds. Please do not interrupt.
+While loop is set to iterate for 60 seconds. Please do not interrupt. Can be changed in the following line: 
+```
+while (time.time()-start_time) < 30:
+```
 
+Change default path to Excel file, which is set to C:\Users\Uporabnik\Desktop\KeypointCoord.xlsx.
+```
+with pd.ExcelWriter(r'C:\Users\Uporabnik\Desktop\KeypointCoord.xlsx') as writer: 
+    df.to_excel(writer, sheet_name='df_1')
+```
+
+## Code
 ```
 import cv2
 import sys
@@ -32,7 +42,8 @@ parser.add_argument('-i', '--input', type=str, default='rgb',
                     help="'rgb' or 'rgb_laconic' or path to video/image file to use as input (default: %(default)s)")  
 parser.add_argument("-o","--output",
                     help="Path to output video file")
-args = parser.parse_args()            
+args = parser.parse_args()
+
 df = pd.DataFrame(columns=['timestamp',
     'nose','left_eye','right_eye','left_ear',
     'right_ear','left_shoulder','right_shoulder','left_elbow',
@@ -40,11 +51,11 @@ df = pd.DataFrame(columns=['timestamp',
     'left_hip','right_hip','left_knee',
     'right_knee','left_ankle','right_ankle'
 ])
+
 pose = MovenetDepthai(input_src=args.input, model=args.model)
 renderer = MovenetRenderer(pose, output=args.output)
 
 data = []
-
 start_time = time.time()
 
 while (time.time()-start_time) < 30:
