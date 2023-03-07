@@ -19,7 +19,7 @@ While loop is set to iterate for 60 seconds. Please do not interrupt. Can be cha
 while (time.time()-start_time) < 30:
 ```
 
-Change default path to Excel file, which is set to C:\Users\Uporabnik\Desktop\KeypointCoord.xlsx.
+Change default path to Excel file, which is set to C:\Users\Uporabnik\Desktop\testing.xlsx.
 ```
 with pd.ExcelWriter(r'C:\Users\Uporabnik\Desktop\testing.xlsx') as writer: 
     df.to_excel(writer, sheet_name='df_1')
