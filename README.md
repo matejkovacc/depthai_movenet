@@ -7,6 +7,9 @@ cd depthai_movenet
 python -m pip install -r requirements.txt
 pip install "numpy<1.24.0"
 cd examples/skeleton_detection
+```
+## Run
+```
 python demo.py
 ```
 ## Warnings
