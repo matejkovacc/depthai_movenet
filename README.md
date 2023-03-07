@@ -21,7 +21,7 @@ while (time.time()-start_time) < 30:
 
 Change default path to Excel file, which is set to C:\Users\Uporabnik\Desktop\KeypointCoord.xlsx.
 ```
-with pd.ExcelWriter(r'C:\Users\Uporabnik\Desktop\KeypointCoord.xlsx') as writer: 
+with pd.ExcelWriter(r'C:\Users\Uporabnik\Desktop\testing.xlsx') as writer: 
     df.to_excel(writer, sheet_name='df_1')
 ```
 
